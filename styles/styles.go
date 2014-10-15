@@ -2,7 +2,7 @@ package styles
 
 import "strconv"
 
-const PREFIX = "\u001b["
+const PREFIX = "\x1b["
 const SUFFIX = "m"
 
 type Code [2]int
@@ -16,43 +16,14 @@ func (s *Style) Print(text string) string {
 	return s.Open + text + s.Close
 }
 
-type styles struct {
-	Reset,
-	Bold,
-	Dim,
-	Italic,
-	Underline,
-	Inverse,
-	Hidden,
-	Strikethrough,
-
-	Black,
-	Red,
-	Green,
-	Yellow,
-	Blue,
-	Magenta,
-	Cyan,
-	White,
-	Gray,
-
-	BgBlack,
-	BgRed,
-	BgGreen,
-	BgYellow,
-	BgBlue,
-	BgMagenta,
-	BgCyan,
-	BgWhite,
-	BgGray Style
-}
-
 var Codes = map[string]Code{
 	"Reset":         {0, 0},
 	"Bold":          {1, 22},
 	"Dim":           {2, 22},
 	"Italic":        {3, 23},
 	"Underline":     {4, 24},
+	"BlinkSlow":     {5, 25},
+	"BlinkRapid":    {6, 26},
 	"Inverse":       {7, 27},
 	"Hidden":        {8, 28},
 	"Strikethrough": {9, 29},
@@ -78,36 +49,38 @@ var Codes = map[string]Code{
 	"BgGray":    {90, 49},
 }
 
-var Styles = styles{
-	Reset:         CreateStyle("Reset"),
-	Bold:          CreateStyle("Bold"),
-	Dim:           CreateStyle("Dim"),
-	Italic:        CreateStyle("Italic"),
-	Underline:     CreateStyle("Underline"),
-	Inverse:       CreateStyle("Inverse"),
-	Hidden:        CreateStyle("Hidden"),
-	Strikethrough: CreateStyle("Strikethrough"),
+var (
+	Reset         = CreateStyle("Reset")
+	Bold          = CreateStyle("Bold")
+	Dim           = CreateStyle("Dim")
+	Italic        = CreateStyle("Italic")
+	Underline     = CreateStyle("Underline")
+	BlinkSlow     = CreateStyle("BlinkSlow")
+	BlinkRapid    = CreateStyle("BlinkRapid")
+	Inverse       = CreateStyle("Inverse")
+	Hidden        = CreateStyle("Hidden")
+	Strikethrough = CreateStyle("Strikethrough")
 
-	Black:   CreateStyle("Black"),
-	Red:     CreateStyle("Red"),
-	Green:   CreateStyle("Green"),
-	Yellow:  CreateStyle("Yellow"),
-	Blue:    CreateStyle("Blue"),
-	Magenta: CreateStyle("Magenta"),
-	Cyan:    CreateStyle("Cyan"),
-	White:   CreateStyle("White"),
-	Gray:    CreateStyle("Gray"),
+	Black   = CreateStyle("Black")
+	Red     = CreateStyle("Red")
+	Green   = CreateStyle("Green")
+	Yellow  = CreateStyle("Yellow")
+	Blue    = CreateStyle("Blue")
+	Magenta = CreateStyle("Magenta")
+	Cyan    = CreateStyle("Cyan")
+	White   = CreateStyle("White")
+	Gray    = CreateStyle("Gray")
 
-	BgBlack:   CreateStyle("BgBlack"),
-	BgRed:     CreateStyle("BgRed"),
-	BgGreen:   CreateStyle("BgGreen"),
-	BgYellow:  CreateStyle("BgYellow"),
-	BgBlue:    CreateStyle("BgBlue"),
-	BgMagenta: CreateStyle("BgMagenta"),
-	BgCyan:    CreateStyle("BgCyan"),
-	BgWhite:   CreateStyle("BgWhite"),
-	BgGray:    CreateStyle("BgGray"),
-}
+	BgBlack   = CreateStyle("BgBlack")
+	BgRed     = CreateStyle("BgRed")
+	BgGreen   = CreateStyle("BgGreen")
+	BgYellow  = CreateStyle("BgYellow")
+	BgBlue    = CreateStyle("BgBlue")
+	BgMagenta = CreateStyle("BgMagenta")
+	BgCyan    = CreateStyle("BgCyan")
+	BgWhite   = CreateStyle("BgWhite")
+	BgGray    = CreateStyle("BgGray")
+)
 
 func CreateStyle(s string) Style {
 	c := Codes[s]
