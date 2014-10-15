@@ -98,7 +98,6 @@ var (
 	LightBlue    = CreateStyle("LightBlue")
 	LightMagenta = CreateStyle("LightMagenta")
 	LightCyan    = CreateStyle("LightCyan")
-	//Gray    = CreateStyle("Gray")
 
 	BgBlack        = CreateStyle("BgBlack")
 	BgRed          = CreateStyle("BgRed")
